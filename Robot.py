@@ -2,11 +2,13 @@ class Robot:
     def __init__(self, x, y, privateGrid, realGrid, rotation):
         self.x = x
         self.y = y
-        self.privateGrid = privateGrid
-        self.realGrid = realGrid
+        self.privateGrid = privateGrid # how given robot sees world
+        self.realGrid = realGrid # how world actually looks
         self.currentRotation = rotation # left, up, right, down or 0,1,2,3
+        self.wantToMove = False # set to True if tries to move
 
     def tryMoveForward(self, inverse=False):
+        self.wantToMove = True
         # if left or right then x axis
         isXAxis = (self.currentRotation % 2 == 0)
         # if right or down we add to x or y
@@ -21,13 +23,25 @@ class Robot:
             nextY+=movement
         self.realGrid.moveRobot(self, nextX, nextY)
         self.privateGrid.moveRobot(self, nextX, nextY)
+        self.wantToMove = False
 
     def tryMoveBackward(self):
-        self.moveForward(inverse=True)
+        self.tryMoveForward(inverse=True)
 
     def updatePosition(self, nextX, nextY):
-        self.x = nextX
-        self.y = nextY
+        if self.wantToMove:
+            # check if nextX - self.x <= 1
+            if abs(nextX-self.x)>1:
+                raise ValueError(
+                    'Abs value between x and nextX has to be <= 1.')
+            if abs(nextY-self.y)>1:
+                raise ValueError(
+                    'Abs value between y and nextY has to be <= 1.')
+            if abs(nextX-self.x) + abs(nextY-self.y) > 1:
+                raise ValueError(
+                    'Cannot move in x and y direction at once')
+            self.x = nextX
+            self.y = nextY
 
     def rotateRight(self, inverse=False):
         rotation = 1
