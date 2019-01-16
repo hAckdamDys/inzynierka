@@ -1,10 +1,11 @@
+from .Robot import Robot
+from .Robot import Robot
 import numpy as np
-import Robot
+
 
 # grid corresponding to actual map where robots move and put blocks
 class BuildingGrid:
     def __init__(self, width, height) -> None:
-        super().__init__()
         self.width = width
         self.height = height
         # grid will have 0 if nothing is on given tile
@@ -15,7 +16,7 @@ class BuildingGrid:
         self.lastTileIndex = 0
         # robots are on separate layer on grid to simplify things
         # since robots are unique we dont need indexes
-        self.robotsGrid = np.zeros((width,height),dtype=Robot)
+        self.robotsGrid = np.zeros((width,height), dtype=Robot)
         self.positionFromRobot = dict()
 
     def addNewTile(self, tile):
