@@ -1,5 +1,4 @@
-from .Robot import Robot
-from .Robot import Robot
+from Robot import Robot
 import numpy as np
 
 

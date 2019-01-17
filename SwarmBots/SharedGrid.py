@@ -1,4 +1,4 @@
-from .BuildingGrid import BuildingGrid 
+from BuildingGrid import BuildingGrid
 
 class SharedGrid(BuildingGrid):
     def __init__(self, *args, **kwargs) -> None:
