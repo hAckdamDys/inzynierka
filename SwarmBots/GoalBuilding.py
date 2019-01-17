@@ -13,7 +13,8 @@ class GoalBuilding:
         textGridTmp = textGridTmp.replace('\n', rowSep)
         textGridTmp = textGridTmp.lstrip(rowSep).rstrip(rowSep)
         self.height = textGridTmp.count(rowSep)
-        firstRow = np.fromstring(textGridTmp.split(rowSep)[0])
+        firstRow = np.fromstring(textGridTmp.split(rowSep)[0], dtype=int,
+                                 sep=' ')
         self.width = firstRow.shape[0]
         self.grid = np.fromstring(textGrid, dtype=int, sep=' ').reshape(
             self.height, self.width)
