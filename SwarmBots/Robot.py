@@ -51,3 +51,9 @@ class Robot:
 
     def rotateLeft(self):
         self.rotateRight(inverse=True)
+
+    def __eq__(self, other=None):
+        if other is None:
+            return False
+        return (self.x, self.y) == (other.x, other.y)
+
