@@ -47,7 +47,7 @@ class Robot:
         rotation = 1
         if inverse:
             rotation=-rotation
-        self.rotation = (self.rotation+rotation)%4
+        self.currentRotation = (self.currentRotation+rotation)%4
 
     def rotateLeft(self):
         self.rotateRight(inverse=True)
