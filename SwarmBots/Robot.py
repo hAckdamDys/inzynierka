@@ -1,9 +1,9 @@
 class Robot:
-    def __init__(self, x, y, privateGrid, realGrid, rotation):
+    def __init__(self, x, y, privateGrid, sharedGrid, rotation):
         self.x = x
         self.y = y
         self.privateGrid = privateGrid # how given robot sees world
-        self.realGrid = realGrid # how world actually looks
+        self.sharedGrid = sharedGrid # how world actually looks
         self.currentRotation = rotation # left, up, right, down or 0,1,2,3
         self.wantToMove = False # set to True if tries to move
 
@@ -21,7 +21,7 @@ class Robot:
             nextX+=movement
         else:
             nextY+=movement
-        self.realGrid.moveRobot(self, nextX, nextY)
+        self.sharedGrid.moveRobot(self, nextX, nextY)
         self.privateGrid.moveRobot(self, nextX, nextY)
         self.wantToMove = False
 
