@@ -20,38 +20,38 @@ dodać taki config do pliku ~/.emacs albo ~/.emacs.d/init.el
 
 ** kilka przydatnych komend
 *** co i jak
-C == ctrl
-M == alt
-np. C-x == ctrl + x
-albo C-x C-f == ctrl + x, potem ctrl + f
+- C == ctrl
+- M == alt
+- np. C-x == ctrl + x
+- albo C-x C-f == ctrl + x, potem ctrl + f
 
 *** emacs 101
-C-g -> ANULUJ/ESC wsiśnij to kilka razy jeśli nie wiesz co się dzieje
++ C-g -> ANULUJ/ESC wsiśnij to kilka razy jeśli nie wiesz co się dzieje
 zawsze można tego użyć aby przestać wykonywać pewną akcję
 
-C-x C-f -> otwórz plik (C-x potem C-f)
-C-x C-s -> zapisz plik
-C-x C-w -> zapisz jako
-C-x b -> zmień bufor
++ C-x C-f -> otwórz plik (C-x potem C-f)
++ C-x C-s -> zapisz plik
++ C-x C-w -> zapisz jako
++ C-x b -> zmień bufor
 
-C-<space> -> zacznij zaznaczać, potem C-<space> aby skończyć
++ C-<space> -> zacznij zaznaczać, potem C-<space> aby skończyć
 
-C-w -> wytnij
-M-w -> kopiuj
-C-y -> wklej (od _yank_)
++ C-w -> wytnij
++ M-w -> kopiuj
++ C-y -> wklej (od _yank_)
 
-C-s -> szukaj w przód
-C-r -> szukaj w tył
++ C-s -> szukaj w przód
++ C-r -> szukaj w tył
 
 *** podział na frame'y (okienka)
-C-x 1 -> tylko obecny frame, ukryj resztę
-C-x 2 -> podzieł góra/dół
-C-x 3 -> podzieł lewo/prawo
-C-x 0 -> schowaj frame'a
-C-x o -> *other* frame
+- C-x 1 -> tylko obecny frame, ukryj resztę
+- C-x 2 -> podzieł góra/dół
+- C-x 3 -> podzieł lewo/prawo
+- C-x 0 -> schowaj frame'a
+- C-x o -> *other* frame
 
 *** praca z org'iem
 aby exportować do pdf'a to w otwartym buforze z plikiem
-C-c C-e -> to otworzy menu exportu w trybie edycji *org*
+- C-c C-e -> to otworzy menu exportu w trybie edycji *org*
 potem *l* aby wybrać *LaLeX* i *o* aby exportować do pdf i otworzyć
 
