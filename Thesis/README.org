@@ -1,11 +1,11 @@
 #+TITLE: Jak tego używać
 
 * emacs
-najlepiej odytować z emacs'a - nie jest wcale taki straszny
+Najlepiej odytować z emacs'a - nie jest wcale taki straszny
 
 ** setup
 
-dodać taki config do pliku ~/.emacs albo ~/.emacs.d/init.el
+Dodać taki config do pliku ~/.emacs albo ~/.emacs.d/init.el
 
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'ox-latex
@@ -17,6 +17,10 @@ dodać taki config do pliku ~/.emacs albo ~/.emacs.d/init.el
 		   ("\\paragraph{%s}" . "\\paragraph*{%s}")
 		   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 #+END_SRC
+
+Doda to nowy _document class_ do org'owego LaTeX'a. Dokładnie to każe dodać do listy
+*org-latex-classes* element *aghthesis*, który znajduje się w tym katalogu. Pozwoli
+to na export do LaTeX'a przy użyciu tego formatu.
 
 ** kilka przydatnych komend
 *** co i jak

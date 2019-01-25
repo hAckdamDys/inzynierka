@@ -6,18 +6,31 @@
 
 * Cel prac i wizja produktu
 
+W rozdziale tym znajdzuje się wprowadzenie do dziedziny problemu pozwalające na dokładniejsze zrozumienie problematyki 
+projektu oraz zawiera objaśnienia pojęć stosowanych w argumentacji.
+
+** Charakterystyka problemu
+
+Od dziesiątków milionów lat na powierzchni ziemi żyją rozmaite gatunki zwierząt z rodziny mrówkowatych. Od zarania dziejów 
+człowiek widział wpływ tych owadów na ich otoczenie, a także ich zaawansowane konstrukcje budowane wspólną pracą. Nie jeden
+naukowiec snuł gdybania skąd te stworzenia więdzą jak zbudować nietrywialną konstrukcję łączących się tysięcy korytarzy 
+i komór. Po latach badań wiemy, że nie wiedzą one absolutnie nic na temat docelowego kszatłu ich twierdzy. Kierują nimi 
+reakcje na rozmaite bodźce spotykane w środowisku: jak na przykład feromony oraz kształt otoczenia.
+
+Zachowanie takich organizmów nazywane jest inteligencją ławicy bądź stadną. Badanią nad emergencją tego zjawiska są ciągle
+rozwijane - wciąż nie wiadomo dlaczego proste zasady zachowań potrafią tworzyć tak skomplikowane rezultaty. Wiemy natomiast
+w jaki sposób kształtować zachowania poszczególnych osobników roju, aby osiągnąć zamierzony globalny skutek. 
+
+Nie widzimi jednak praktycznego zastosowania takich konstruktów w życiu codziennym. 
+
 Celem projektu jest zbadanie zachowań inteligencji stadnej poprzez napisanie symulatora zachowań prostych bytów 
 w dyskretnej przestrzeni oraz implementacji fizycznej jednego takiego bytu. Docelowo mają one naśladować zachowania 
 takich superorganizmów jak roje termitów oraz mrówek.
 
-** Tło problemu
-
-Od tysięcy lat człowiek obserwował zachowania superorganizmów zachwycając się zaawansowaniem struktur, które budują. 
-Współcześnie, dzięki szybkiemu rozwojowi nauki, potrafi już zrozumieć wzorce, według których działają te fascynujące
-stworzenia. Implementuje się rozmaite roboty, które przy pomocy prostych zasad działania potrafią razem wykonywać 
-skomplikowane czynności, których rozwiązanie w świadomy/kontrolowany sposób, byłoby bardzo trudne.
-
-** Dlaczego 
+** Motywacja projektu
+** Wizja produktu
+** Studium wykonalności
+** Analiza zagrożeń
 
 * Zakres funkcjonalności
 * Wybrane aspekty realizacji
