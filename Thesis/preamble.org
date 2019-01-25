@@ -1,0 +1,12 @@
+#+LaTeX_CLASS: aghthesis
+#+LaTeX_HEADER: \usepackage[latin2]{inputenc}
+#+LaTeX_HEADER: \usepackage{url}
+#+LaTeX_HEADER: \author{Adam Ćwiertnia, Adam Dyszy, Kamil Kolasa}
+#+LaTeX_HEADER: \titlePL{Koordynacja działań grupy robotów wykorzystująca inteligencję stadną}
+#+LaTeX_HEADER: \titleEN{Multi-robot system coordination using swarm intelligence}
+#+LaTeX_HEADER: \fieldofstudy{Informatyka}
+#+LaTeX_HEADER: \supervisor{rd inż. Wojciech Zaborowski AGH}
+
+#+LaTeX_HEADER: \date{\the\year}
+#+LaTeX_HEADER: \maketitle
+

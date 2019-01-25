@@ -1,0 +1,33 @@
+#+TITLE: *Koordynacja działań grupy robotów wykorzystująca inteligencję stadną.*
+#+OPTIONS: title:nil toc:nil H:4 author:nil date:nil TeX:t LaTeX:t ^:nil
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+INCLUDE: "./preamble.org"
+
+* Cel prac i wizja produktu
+
+Celem projektu jest zbadanie zachowań inteligencji stadnej poprzez napisanie symulatora zachowań prostych bytów 
+w dyskretnej przestrzeni oraz implementacji fizycznej jednego takiego bytu. Docelowo mają one naśladować zachowania 
+takich superorganizmów jak roje termitów oraz mrówek.
+
+** Tło problemu
+
+Od tysięcy lat człowiek obserwował zachowania superorganizmów zachwycając się zaawansowaniem struktur, które budują. 
+Współcześnie, dzięki szybkiemu rozwojowi nauki, potrafi już zrozumieć wzorce, według których działają te fascynujące
+stworzenia. Implementuje się rozmaite roboty, które przy pomocy prostych zasad działania potrafią razem wykonywać 
+skomplikowane czynności, których rozwiązanie w świadomy/kontrolowany sposób, byłoby bardzo trudne.
+
+** Dlaczego 
+
+* Zakres funkcjonalności
+* Wybrane aspekty realizacji
+* Organizacja pracy
+* Wyniki projektu
+
+
+# Test cytowania
+\cite{artykul2011}
+
+\clearpage
+\bibliography{bibliografia.bib}
+\bibliographystyle{IEEEannotU}

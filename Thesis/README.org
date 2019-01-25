@@ -1,0 +1,44 @@
+#+TITLE: Jak tego używać
+
+* emacs
+najlepiej odytować z emacs'a - nie jest wcale taki straszny
+
+** setup
+
+dodać taki config do pliku ~/.emacs albo ~/.emacs.d/init.el
+
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes
+		 '("aghthesis" "\\documentclass[polish,12pt]{aghthesis}"
+		   ("\\section{%s}" . "\\section*{%s}")
+		   ("\\subsection{%s}" . "\\subsection*{%s}")
+		   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+#+END_SRC
+
+** kilka przydatnych komend
+
+C == ctrl
+
+M == alt
+
+C-x == ctrl + x
+
+C-x C-f -> otwórz plik (C-x potem C-f)
+
+C-x C-s -> zapisz plik
+
+C-x C-w -> zapisz jako
+
+C-x b -> zmień bufor
+
+C-g -> ANULUJ/ESC wsiśnij to kilka razy jeśli nie wiesz co się dzieje
+
+aby exportować do pdf'a to w otwartym buforze z plikiem
+
+C-c C-e -> to otworzy menu exportu w trybie edycji *org*
+
+potem *l* aby wybrać *LaLeX* i *o* aby exportować do pdf i otworzyć
+
