@@ -26,10 +26,16 @@ class TestGoalBuilding(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 0]
         ])
 
+    def test_goalBuildingInitialization(self):
+        textGrid = self.textGrid
+        goalBuilding = GoalBuilding(textGrid)
+        assert goalBuilding
+
     def test_simple_grid(self):
         textGrid = self.textGrid
         resultGrid = self.resultGrid
         goalBuilding = GoalBuilding(textGrid)
+        assert goalBuilding
         assert np.array_equal(goalBuilding.grid, resultGrid)
 
     def test_wrong_grid(self):
