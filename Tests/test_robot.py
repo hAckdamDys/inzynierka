@@ -17,8 +17,6 @@ def robot(request):
 def test_robotInitialization(robot):
     assert robot
 
-# def test_tryMoveForward(robot):
-
 @pytest.mark.parametrize("updateX, updateY", (
         (0, 0),
         (1, 0),
