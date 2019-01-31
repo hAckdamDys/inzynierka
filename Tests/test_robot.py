@@ -1,18 +1,16 @@
 import pytest
+from unittest.mock import MagicMock
 from SwarmBots.Robot import Robot
 
 @pytest.fixture(params=[0,1,2,3])
 def robot(request):
-    robot = Robot(0, 0, [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ], [
-            [0, 0, 0],
-            [0, 1, 0],
-            [0, 0, 0]
-        ], rotation=request.param)
-    return robot
+        buildingGrid = MagicMock
+        buildingGrid.__init__.return_value = '[[0, 0, 0]' \
+                                             '[0, 0, 0]' \
+                                             '[0, 0, 0]]'
+
+        robot = Robot(0, 0, buildingGrid, buildingGrid, rotation=request.param)
+        return robot
 
 def test_robotInitialization(robot):
     assert robot
