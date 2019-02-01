@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-from SwarmBots.Robot import Robot
+from SwarmBots.robot import Robot
 
 @pytest.fixture(params=[0,1,2,3])
 def robot(request):

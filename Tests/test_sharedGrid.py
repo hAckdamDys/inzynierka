@@ -1,5 +1,5 @@
 import pytest
-from SwarmBots.SharedGrid import SharedGrid
+from SwarmBots.sharedGrid import SharedGrid
 
 def test_sharedGridInitialization():
     sharedGrid = SharedGrid(8, 8)

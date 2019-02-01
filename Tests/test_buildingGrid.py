@@ -1,4 +1,4 @@
-from SwarmBots.BuildingGrid import BuildingGrid
+from SwarmBots.buildingGrid import BuildingGrid
 from unittest.mock import Mock
 import pytest
 
