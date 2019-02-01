@@ -1,4 +1,4 @@
-from Robot import Robot
+from SwarmBots.robot import Robot
 import numpy as np
 
 
