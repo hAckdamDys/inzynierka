@@ -9,7 +9,7 @@ def robot(request):
     sharedGrid = SharedGrid(3, 3)
 
     robot = Robot(0, 0, sharedGrid, rotation=request.param)
-        return robot
+    return robot
 
 def test_robotInitialization(robot):
     assert robot
