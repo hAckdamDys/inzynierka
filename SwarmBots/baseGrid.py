@@ -15,8 +15,8 @@ class BaseGrid:
             if (tileGrid is not None) or (tilesFromIndex is not None) or \
                     (indexFromTiles is not None) or (
                     lastTileIndex is not None):
-                raise ValueError("tileGrid,tilesFromIndex,lastTileIndex and " + \
-                                 +"indexFromTiles needs to be all None or all set")
+                raise ValueError("tileGrid,tilesFromIndex,lastTileIndex and " +
+                                 "indexFromTiles needs to be all None or all set")
             self.tileGrid = np.zeros((width, height), int)
             self.tilesFromIndex = dict()
             self.indexFromTiles = dict()

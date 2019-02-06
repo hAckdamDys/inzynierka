@@ -30,8 +30,7 @@ class SharedGrid(BaseGrid):
         self.positionFromRobot[robot] = (robot.x, robot.y)
 
     def moveRobot(self, robot, nextX, nextY):
-        # TODO: implement this function
-        canMove = self.checkIfCanMove(robot)
+        canMove = self.checkIfCanMove(robot, nextX, nextY)
         if not canMove:
             return
         # clean last position
@@ -40,3 +39,22 @@ class SharedGrid(BaseGrid):
         self.robotsGrid[nextX, nextY] = robot
         self.positionFromRobot[robot] = (nextX, nextY)
         robot.updatePosition(nextX, nextY)
+
+    def checkIfCanMove(self, robot, nextX, nextY):
+        # can't move out of grid
+        if (nextX < 0) or (nextY < 0):
+            print("out of bound", nextX, nextY)
+            return False
+        if (nextX >= self.width) or (nextY >= self.width):
+            print("out of bound", nextX, nextY)
+            return False
+        # TODO maybe instead of bool return some information so robot knows what it hit
+        if self.robotsGrid[nextX, nextY] != 0:
+            print("there is a robot on ", self.robotsGrid[nextX, nextY])
+            return False
+        if self.tileGrid[nextY, nextY] != 0:
+            # TODO same here if robot can enter for example ramp then True
+            # something like "if robot can enter tile from his position then true"
+            print("there is some tile on ", self.robotsGrid[nextX, nextY])
+            return False
+        return True

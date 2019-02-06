@@ -2,7 +2,7 @@ from SwarmBots.baseGrid import BaseGrid
 import numpy as np
 
 
-# grid corresponding to actual map where robots move and put blocks
+# grid corresponding to robot's view of a map
 class PrivateGrid(BaseGrid):
     def __init__(self, width, height, tileGrid=None, tilesFromIndex=None,
                  indexFromTiles=None, lastTileIndex=None) -> None:
@@ -10,3 +10,4 @@ class PrivateGrid(BaseGrid):
                          tilesFromIndex=tilesFromIndex,
                          indexFromTiles=indexFromTiles,
                          lastTileIndex=lastTileIndex)
+
