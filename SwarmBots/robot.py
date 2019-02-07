@@ -1,28 +1,37 @@
+import uuid
+from Util.Directions import Directions
+
 class Robot:
-    def __init__(self, x, y, privateGrid, sharedGrid, rotation):
+    def __init__(self, x, y, sharedGrid, rotation):
         self.x = x
         self.y = y
-        self.privateGrid = privateGrid # how given robot sees world
+        self.id = uuid.uuid4()
         self.sharedGrid = sharedGrid # how world actually looks
-        self.currentRotation = rotation # left, up, right, down or 0,1,2,3
+        sharedGrid.addRobot(self)
+        self.privateGrid = sharedGrid.getPrivateGridCopy()  # how given robot sees world
+        self.currentRotation = rotation  # Direction. left, up, right, or down
         self.wantToMove = False # set to True if tries to move
+
+    # changes True to 1 and False to -1
+    def boolToRotation(self, bool):
+        return 2 * bool - 1
 
     def tryMoveForward(self, inverse=False):
         self.wantToMove = True
         # if left or right then x axis
-        isXAxis = (self.currentRotation % 2 == 0)
+        isXAxis = (self.currentRotation.value % 2 == 0)
         # if right or down we add to x or y
-        movement = (self.currentRotation >= 2)
+        movement = (self.currentRotation.value >= 2)
         if inverse:
             movement = (not movement)
         nextX = self.x
         nextY = self.y
         if isXAxis:
-            nextX+=movement
+            nextX += self.boolToRotation(movement)
         else:
-            nextY+=movement
+            nextY += self.boolToRotation(movement)
         self.sharedGrid.moveRobot(self, nextX, nextY)
-        self.privateGrid.moveRobot(self, nextX, nextY)
+        # self.privateGrid.moveRobot(self, nextX, nextY)
         self.wantToMove = False
 
     def tryMoveBackward(self):
@@ -47,13 +56,21 @@ class Robot:
         rotation = 1
         if inverse:
             rotation=-rotation
-        self.currentRotation = (self.currentRotation+rotation)%4
+        self.currentRotation = Directions(
+            (self.currentRotation.value + rotation) % 4)
 
     def rotateLeft(self):
         self.rotateRight(inverse=True)
 
+    def __str__(self):
+        return str(self.x) + "," + str(self.y)
+
+    def __hash__(self):
+        return hash(self.id)
+
     def __eq__(self, other=None):
         if other is None:
             return False
-        return (self.x, self.y) == (other.x, other.y)
-
+        if not isinstance(other, Robot):
+            return False
+        return self.id == other.id
