@@ -1,10 +1,11 @@
 from SwarmBots.robot import Robot
 import numpy as np
-
+from multiprocessing import Manager
 
 # grid corresponding to actual map where robots move and put blocks
 class BaseGrid:
-    def __init__(self, width, height, tileGrid=None, tilesFromIndex=None,
+    def __init__(self, width, height, manager, tileGrid=None,
+                 tilesFromIndex=None,
                  indexFromTiles=None, lastTileIndex=None) -> None:
         self.width = width
         self.height = height
@@ -18,8 +19,8 @@ class BaseGrid:
                 raise ValueError("tileGrid,tilesFromIndex,lastTileIndex and " +
                                  "indexFromTiles needs to be all None or all set")
             self.tileGrid = np.zeros((width, height), int)
-            self.tilesFromIndex = dict()
-            self.indexFromTiles = dict()
+            self.tilesFromIndex = manager.dict()
+            self.indexFromTiles = manager.dict()
             self.lastTileIndex = 0
         else:
             self.tileGrid = tileGrid

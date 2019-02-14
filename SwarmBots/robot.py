@@ -2,15 +2,17 @@ import uuid
 from Util.Directions import Directions
 
 class Robot:
-    def __init__(self, x, y, sharedGrid, rotation):
+    def __init__(self, x, y, manager, sharedGrid, rotation, algorithm=None):
         self.x = x
         self.y = y
         self.id = uuid.uuid4()
         self.sharedGrid = sharedGrid # how world actually looks
         sharedGrid.addRobot(self)
-        self.privateGrid = sharedGrid.getPrivateGridCopy()  # how given robot sees world
+        self.privateGrid = sharedGrid.getPrivateGridCopy(
+            manager)  # how given robot sees world
         self.currentRotation = rotation  # Direction. left, up, right, or down
         self.wantToMove = False # set to True if tries to move
+        self.currentAlgorithm = algorithm
 
     # changes True to 1 and False to -1
     def boolToRotation(self, bool):
@@ -61,6 +63,19 @@ class Robot:
 
     def rotateLeft(self):
         self.rotateRight(inverse=True)
+
+    def startWorking(self, algorithm=None):
+        if algorithm is not None:
+            self.currentAlgorithm = algorithm(self)
+        self.currentAlgorithm.startWorking()
+
+    def waitForFinish(self):
+        self.currentAlgorithm.waitForFinish()
+
+    def stopWorking(self):
+        if self.currentAlgorithm is None:
+            raise ValueError('cannot stop working without algorithm')
+        self.currentAlgorithm.stopWorking()
 
     def __str__(self):
         return str(self.x) + "," + str(self.y)

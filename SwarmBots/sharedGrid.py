@@ -1,22 +1,23 @@
 from SwarmBots.baseGrid import BaseGrid
 from SwarmBots.robot import Robot
 import numpy as np
-
+from multiprocessing import Manager
 from privateGrid import PrivateGrid
 
 
 class SharedGrid(BaseGrid):
     noRobot = 0
 
-    def __init__(self, width, height) -> None:
-        super().__init__(width=width, height=height)
+    def __init__(self, width, height, manager) -> None:
+        super().__init__(width=width, height=height, manager=manager)
         # robots are on separate layer on grid to simplify things
         # since robots are unique we dont need indexes
         self.robotsGrid = np.zeros((self.width, self.height), dtype=Robot)
-        self.positionFromRobot = dict()
+        self.positionFromRobot = manager.dict()
 
-    def getPrivateGridCopy(self) -> PrivateGrid:
+    def getPrivateGridCopy(self, manager) -> PrivateGrid:
         privateGrid = PrivateGrid(width=self.width, height=self.height,
+                                  manager=manager,
                                   tileGrid=self.tileGrid.copy(),
                                   tilesFromIndex=self.tilesFromIndex.copy(),
                                   indexFromTiles=self.indexFromTiles.copy(),
