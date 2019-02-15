@@ -1,9 +1,9 @@
-from Util.Directions import Directions
+from Util.directions import Directions
 from SwarmBots.robot import Robot
 from multiprocessing import Process, Lock
 
 
-class RobotAlgorithm():
+class RobotAlgorithmExecutor():
     def __init__(self, robot):
         self.robot = robot
 

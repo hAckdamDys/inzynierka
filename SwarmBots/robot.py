@@ -1,25 +1,35 @@
 import uuid
-from Util.Directions import Directions
+from Util.directions import Directions
+from SwarmBots.Util.hitInformation import HitInformation
+
 
 class Robot:
     def __init__(self, x, y, manager, sharedGrid, rotation, algorithm=None):
         self.x = x
         self.y = y
         self.id = uuid.uuid4()
-        self.sharedGrid = sharedGrid # how world actually looks
+        self.sharedGrid = sharedGrid  # how world actually looks
         sharedGrid.addRobot(self)
         self.privateGrid = sharedGrid.getPrivateGridCopy(
             manager)  # how given robot sees world
         self.currentRotation = rotation  # Direction. left, up, right, or down
-        self.wantToMove = False # set to True if tries to move
+        self.wantToMove = False  # set to True if tries to move
         self.currentAlgorithm = algorithm
+        self.hasTile = False
 
     # changes True to 1 and False to -1
     def boolToRotation(self, bool):
         return 2 * bool - 1
 
-    def tryMoveForward(self, inverse=False):
-        self.wantToMove = True
+    def takeTileFromSource(self):
+        self.hasTile = True
+
+    def takeTile(self):
+        pass
+        # 1. check if tile exist
+        # 2. if exist then take actualize private and shared grid
+
+    def getNextXY(self, inverse=False):
         # if left or right then x axis
         isXAxis = (self.currentRotation.value % 2 == 0)
         # if right or down we add to x or y
@@ -32,9 +42,31 @@ class Robot:
             nextX += self.boolToRotation(movement)
         else:
             nextY += self.boolToRotation(movement)
-        self.sharedGrid.moveRobot(self, nextX, nextY)
-        # self.privateGrid.moveRobot(self, nextX, nextY)
+        return nextX, nextY
+
+    def privateGridUpdateHitInformation(self, hitInformation, nextX, nextY):
+        if hitInformation != HitInformation.NOHIT:
+            # actualize private grid with that information
+            if hitInformation == HitInformation.TILE:
+                self.privateGrid.addTile(hitInformation, nextX, nextY)
+
+    def tryPutTile(self):
+        if not self.hasTile:
+            return False  # or raise error?
+        nextX, nextY = self.getNextXY()
+        hitInformation = self.sharedGrid.putTile(nextX, nextY)
+        self.privateGridUpdateHitInformation(hitInformation, nextX, nextY)
+        if hitInformation == HitInformation.NOHIT:
+            self.hasTile = False
+        return hitInformation
+
+    def tryMoveForward(self, inverse=False):
+        self.wantToMove = True
+        nextX, nextY = self.getNextXY(inverse=inverse)
+        hitInformation = self.sharedGrid.moveRobot(self, nextX, nextY)
+        self.privateGridUpdateHitInformation(hitInformation, nextX, nextY)
         self.wantToMove = False
+        return hitInformation  # so algorithm can know what to do
 
     def tryMoveBackward(self):
         self.tryMoveForward(inverse=True)
@@ -42,13 +74,13 @@ class Robot:
     def updatePosition(self, nextX, nextY):
         if self.wantToMove:
             # check if nextX - self.x <= 1
-            if abs(nextX-self.x)>1:
+            if abs(nextX - self.x) > 1:
                 raise ValueError(
                     'Abs value between x and nextX has to be <= 1.')
-            if abs(nextY-self.y)>1:
+            if abs(nextY - self.y) > 1:
                 raise ValueError(
                     'Abs value between y and nextY has to be <= 1.')
-            if abs(nextX-self.x) + abs(nextY-self.y) > 1:
+            if abs(nextX - self.x) + abs(nextY - self.y) > 1:
                 raise ValueError(
                     'Cannot move in x and y direction at once')
             self.x = nextX
@@ -57,20 +89,12 @@ class Robot:
     def rotateRight(self, inverse=False):
         rotation = 1
         if inverse:
-            rotation=-rotation
+            rotation = -rotation
         self.currentRotation = Directions(
             (self.currentRotation.value + rotation) % 4)
 
     def rotateLeft(self):
         self.rotateRight(inverse=True)
-
-    def startWorking(self, algorithm=None):
-        if algorithm is not None:
-            self.currentAlgorithm = algorithm(self)
-        self.currentAlgorithm.startWorking()
-
-    def waitForFinish(self):
-        self.currentAlgorithm.waitForFinish()
 
     def stopWorking(self):
         if self.currentAlgorithm is None:
