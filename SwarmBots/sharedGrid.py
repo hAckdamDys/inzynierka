@@ -89,4 +89,4 @@ class SharedGrid(BaseGrid):
 
     def __str__(self):
         return super().__str__() + "\nrobot grid:\n" + \
-               str(np.vectorize(self.robotToR)(self.robotsGrid[0]))
+               str(np.vectorize(self.robotToR)(self.robotsGrid[0].T))
