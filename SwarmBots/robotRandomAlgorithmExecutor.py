@@ -34,7 +34,7 @@ class RobotRandomAlgorithmExecutor(RobotAlgorithmExecutor):
                       'take tile from source')
                 self.robot.takeTileFromSource()
 
-            time.sleep(1)
+            time.sleep(0.1)
             iteration += 1
             # if (iteration > 5):
             #     return

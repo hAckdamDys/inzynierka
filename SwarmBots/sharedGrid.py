@@ -15,7 +15,7 @@ class SharedGrid(BaseGrid):
         # robots are on separate layer on grid to simplify things
         # since robots are unique we dont need indexes
         # self.lock = Lock()
-        self.lock = manager.Lock()
+        # self.lock = manager.Lock()
         self.robotsGrid = manager.list()
         self.robotsGrid.append(
             np.zeros((self.width, self.height), dtype=Robot))
@@ -32,9 +32,11 @@ class SharedGrid(BaseGrid):
 
     def setRobotsGridElement(self, x, y, robot):
         # print("setting robot on ",x,y)
+        self.lock.acquire()
         a = self.robotsGrid[0]
         a[x, y] = robot
         self.robotsGrid[0] = a
+        self.lock.release()
         # print(self.robotsGrid)
 
     def getRobotsGridElement(self, x, y):
@@ -58,7 +60,7 @@ class SharedGrid(BaseGrid):
         if tmp != 0:
             print("there is a robot on ", tmp)
             return HitInformation.ROBOT
-        if self.getTileIndex(nextY, nextY) != 0:
+        if self.getTileIndex(nextX, nextY) != 0:
             # print("there is some tile on ", self.robotsGrid[nextX, nextY])
             return HitInformation.TILE
         return HitInformation.NOHIT

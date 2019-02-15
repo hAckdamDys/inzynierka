@@ -55,9 +55,19 @@ class Robot:
             return False  # or raise error?
         nextX, nextY = self.getNextXY()
         hitInformation = self.sharedGrid.putTile(nextX, nextY)
-        self.privateGridUpdateHitInformation(hitInformation, nextX, nextY)
         if hitInformation == HitInformation.NOHIT:
+            # then we put tile
             self.hasTile = False
+            self.privateGridUpdateHitInformation(HitInformation.TILE, nextX,
+                                                 nextY)
+        elif hitInformation != HitInformation.ROBOT:
+            self.privateGridUpdateHitInformation(hitInformation, nextX,
+                                                 nextY)
+        self.sharedGrid.lock.acquire()
+        print(self, "tryput:hit=", hitInformation, "private:\n",
+              self.privateGrid,
+              "\nshared:\n", self.sharedGrid)
+        self.sharedGrid.lock.release()
         return hitInformation
 
     def tryMoveForward(self, inverse=False):
@@ -66,6 +76,11 @@ class Robot:
         hitInformation = self.sharedGrid.moveRobot(self, nextX, nextY)
         self.privateGridUpdateHitInformation(hitInformation, nextX, nextY)
         self.wantToMove = False
+        self.sharedGrid.lock.acquire()
+        print(self, "trymove:hit=", hitInformation, "private:\n",
+              self.privateGrid,
+              "\nshared:\n", self.sharedGrid)
+        self.sharedGrid.lock.release()
         return hitInformation  # so algorithm can know what to do
 
     def tryMoveBackward(self):
@@ -102,7 +117,8 @@ class Robot:
         self.currentAlgorithm.stopWorking()
 
     def __str__(self):
-        return str(self.x) + "," + str(self.y)
+        return str(self.x) + "," + str(self.y) + "," + \
+               str(self.currentRotation)
 
     def __hash__(self):
         return hash(self.id)

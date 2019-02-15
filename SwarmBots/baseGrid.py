@@ -3,6 +3,7 @@ import numpy as np
 from multiprocessing import Manager
 from SwarmBots.Util.hitInformation import HitInformation
 
+
 # grid corresponding to actual map where robots move and put blocks
 class BaseGrid:
     def __init__(self, width, height, manager, tileGrid=None,
@@ -10,6 +11,8 @@ class BaseGrid:
                  indexFromTiles=None, lastTileIndex=None) -> None:
         self.width = width
         self.height = height
+        self.lock = manager.Lock()
+        self.locked = False
         # grid will have 0 if nothing is on given tile
         # and index of tile otherwise
         if (tileGrid is None) or (tilesFromIndex is None) or \
@@ -34,19 +37,23 @@ class BaseGrid:
             self.lastTileIndex = lastTileIndex
 
     def addNewTile(self, tile):
+        self.lock.acquire()
         self.lastTileIndex += 1
         self.tilesFromIndex[self.lastTileIndex] = tile
         self.indexFromTiles[tile] = self.lastTileIndex
+        self.lock.release()
 
     def getTileIndex(self, x, y):
         return self.tileGrid[0][x, y]
 
     def addTile(self, tile, x, y):
+        self.lock.acquire()
         tileIndex = self.indexFromTiles[tile]
+        print("tile n index:", str(tile), ":", str(tileIndex))
         a = self.tileGrid[0]
         a[x, y] = tileIndex
         self.tileGrid[0] = a
-        print("XY", self)
+        self.lock.release()
 
     def __str__(self):
         print(hash(self))

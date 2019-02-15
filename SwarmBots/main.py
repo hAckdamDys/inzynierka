@@ -19,8 +19,8 @@ def main():
         """)
     sharedGrid = SharedGrid(width=goalBuilding.width,
                             height=goalBuilding.height, manager=manager)
-    robot1 = Robot(0, 0, manager, sharedGrid, Directions.RIGHT)
-    robot2 = Robot(5, 4, manager, sharedGrid, Directions.LEFT)
+    robot1 = Robot(0, 0, manager, sharedGrid, Directions.LEFT)
+    robot2 = Robot(5, 4, manager, sharedGrid, Directions.RIGHT)
     robot1Executor = RobotRandomAlgorithmExecutor(robot1)
     robot2Executor = RobotRandomAlgorithmExecutor(robot2)
     # robot1Executor = Robot1Executor(robot1)
