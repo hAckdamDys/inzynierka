@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock
 from SwarmBots.robot import Robot
 from SwarmBots.sharedGrid import SharedGrid
-from SwarmBots.Util.Directions import Directions
+from SwarmBots.Util.directions import Directions
 
 @pytest.fixture(params=[0,1,2,3])
 def robot(request):
